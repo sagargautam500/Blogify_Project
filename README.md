@@ -50,60 +50,60 @@
 
 ## 📁 Project Structure
 
-     ```plaintext
-Blogify/
-├── controllers/
-│   ├── blogController.js
-│   └── userController.js
-├── models/
-│   ├── Blog.js
-│   └── User.js
-├── routes/
-│   ├── blog.js
-│   └── user.js
-├── views/
-│   ├── partials/
-│   │   ├── head.ejs
-│   │   ├── nav.ejs
-│   │   └── script.ejs
-│   ├── home.ejs
-│   ├── signup.ejs
-│   ├── signin.ejs
-├── public/
-│   └── images/
-│       └── defaultProfile.jpg
-├── uploads/               # Stores blog images (disk storage)
-├── .env                  # Environment variables
-├── index.js              # Main entry point (root file)
-├── package.json
-└── README.md
+   
+             Blogify/
+             ├── controllers/
+             │   ├── blogController.js
+             │   └── userController.js
+             ├── models/
+             │   ├── Blog.js
+             │   └── User.js
+             ├── routes/
+             │   ├── blog.js
+             │   └── user.js
+             ├── views/
+             │   ├── partials/
+             │   │   ├── head.ejs
+             │   │   ├── nav.ejs
+             │   │   └── script.ejs
+             │   ├── home.ejs
+             │   ├── signup.ejs
+             │   ├── signin.ejs
+             ├── public/
+             │   └── images/
+             │       └── defaultProfile.jpg
+             ├── uploads/               # Stores blog images (disk storage)
+             ├── .env                  # Environment variables
+             ├── index.js              # Main entry point (root file)
+             ├── package.json
+             └── README.md
 
 
 
+##  🔧    Installation & Setup
 
----
+  1. **Clone the Repository**
 
-## 🔧  Installation & Setup
+   
+          git clone https://github.com/sagargautam500/blogify.git
+          cd blogify
 
-1. **Clone the Repository**
+2. Install Dependencies
+   
+       npm install
+4. Create .env File
+   
+    Create a .env file in the root directory with the following content:
+   
+          DB_PATH=mongodb+srv://sagargautam389:sagargautam389@usercluster.tmvdaad.mongodb.net/blogify?retryWrites=true&w=majority&appName=userCluster
+          JWT_SECRET=$sagarGtm$$$@389
+          PORT=3000
+    Make sure MongoDB is running locally on your system.
 
-```bash
-git clone https://github.com/yourusername/blogify.git
-cd blogify
-
-2.Install Dependencies
-   npm install
-3.Create .env File
-
-Create a .env file in the root directory with the following content:
-DB_PATH=mongodb://localhost:27017/blogifydb
-JWT_SECRET=your_jwt_secret_key
-PORT=3000
-Make sure MongoDB is running locally on your system.
-
-4.Run the Application
-  npm start
-Then open http://localhost:3000 in your browser.
+4. Run the Application
+   
+             npm start
+      Then open http://localhost:3000 in your browser.
 
 ✅ Usage
 🔐 Sign Up
@@ -114,7 +114,7 @@ Optionally upload a profile picture (stored in MongoDB)
 🔓 Sign In
 Login with email and password
 
-User session is created upon login
+token  is created and set cookie upon login
 
 📝 Create Blog Post
 Enter blog title, content, and upload an image (stored in uploads/ folder)
