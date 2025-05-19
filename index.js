@@ -6,7 +6,7 @@ const homeRouter = require("./routes/home_router");
 const userRouter = require("./routes/user_router");
 const checkAuthentication = require("./middleware/authentication");
 const blogRouter = require("./routes/blog_router");
-const { dbPath } = require("./config/configuration");
+const { dbPath, PORT } = require("./config/configuration");
 
 const app = express();
 
@@ -40,7 +40,6 @@ mongoose
   .catch((err) => {
     console.log("Error occur while database connect:", err);
   });
-const PORT = 3002;
 app.listen(PORT, () => {
   console.log(`server running at http://localhost:${PORT}`);
 });
