@@ -42,7 +42,7 @@
   <body>
     <%- include('./partials/nav') %>
 
-    <section class="container my-5">
+    <section class="container my-5 ">
       <div class="text-center mb-5">
         <h1 class="display-5 fw-bold mb-3">All Blogs</h1>
         <a href="/addblogs" class="btn btn-primary px-4 py-2">
@@ -65,7 +65,7 @@
         <div class="row g-4">
           <% blogs.forEach(blog => { %>
             <div class="col-md-6 col-lg-4">
-              <div class="blog-card h-100">
+              <div class="blog-card h-100 py-5 px-4">
                 <div class="card-img-top overflow-hidden">
                   <img
                     src="<%= blog.blogImageUrl %>"
