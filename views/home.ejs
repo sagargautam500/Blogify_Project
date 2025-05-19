@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Blogify | Home</title>
+    <style>
+      /* Enhanced Hero Section */
+      .hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("/images/blog-hero.jpeg") center/cover no-repeat;
+        color: white;
+        padding: 120px 20px;
+        text-align: center;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        margin: 2rem auto;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        letter-spacing: -1px;
+        margin-bottom: 1.5rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+      }
+
+      .hero p {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .btn-get-started {
+        font-size: 1.1rem;
+        padding: 12px 35px;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
+        font-weight: 500;
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+      }
+
+      /* Features Section Enhancements */
+      .features {
+        padding: 80px 0;
+        background: #f8fafc;
+      }
+
+      .features h2 {
+        font-weight: 800;
+        margin-bottom: 3rem;
+        color: #1a1a1a;
+        font-size: 2.5rem;
+      }
+
+      .feature-box {
+        padding: 2rem;
+        border-radius: 15px;
+        background: white;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        transition: transform 0.3s ease;
+        margin-bottom: 1.5rem;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .feature-box:hover {
+        transform: translateY(-5px);
+      }
+
+      .feature-icon {
+        font-size: 2.5rem;
+        color: #007bff;
+        margin-bottom: 1.5rem;
+        background: rgba(0, 123, 255, 0.1);
+        width: 70px;
+        height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+      }
+
+      /* Blog Cards Styling */
+      .blog-card {
+        border: none;
+        border-radius: 15px;
+        overflow: hidden;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      }
+
+      .blog-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+      }
+
+      .card-img-top {
+        height: 250px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .blog-card:hover .card-img-top {
+        transform: scale(1.03);
+      }
+
+      .author-avatar {
+        width: 45px;
+        height: 45px;
+        object-fit: cover;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .comment-section {
+        background: #f8fafc;
+        border-top: 1px solid #e9ecef;
+      }
+
+      .latest-comment {
+        background: white;
+        border-radius: 8px;
+        padding: 1rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+
+    <!-- Hero Section -->
+    <section class="hero container mt-4">
+      <h1>Welcome to Blogify</h1>
+      <p>
+        Discover stories, share your ideas, and connect with others on Blogify —
+        your personal blogging companion.
+      </p>
+      <% if(user){ %>
+      <a href="/addblogs" class="btn btn-primary btn-get-started"
+        >Get Started</a
+      >
+      <% } else{ %>
+      <a href="/user/signin" class="btn btn-primary btn-get-started"
+        >Get Started</a
+      >
+      <% }%>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features container">
+      <h2 class="text-center mb-5">Why Blogify?</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="feature-box">
+            <div class="feature-icon">
+              <i class="bi bi-pencil-square"></i>
+            </div>
+            <h3 class="h4 mb-3">Create and Publish</h3>
+            <p class="text-muted mb-0">
+              Write beautiful posts and publish them instantly to your followers
+              and the world.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box">
+            <div class="feature-icon">
+              <i class="bi bi-chat-dots"></i>
+            </div>
+            <h3 class="h4 mb-3">Engage & Interact</h3>
+            <p class="text-muted mb-0">
+              Receive feedback, start discussions, and build your reader
+              community.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="feature-box">
+            <div class="feature-icon">
+              <i class="bi bi-bar-chart-line"></i>
+            </div>
+            <h3 class="h4 mb-3">Track Your Growth</h3>
+            <p class="text-muted mb-0">
+              View stats and insights on how your blogs perform over time.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest Blogs Section -->
+    <section class="container my-5">
+      <h2 class="text-center mb-5 display-5 fw-bold">Latest Blogs</h2>
+      <div class="row g-4">
+        <% blogs.forEach(blog => { %>
+        <div class="col-md-4">
+          <div class="blog-card h-100">
+            <!-- Blog Image -->
+            <div class="card-img-top" style="height: 300px; overflow: hidden">
+              <img
+                src="<%= blog.blogImageUrl %>"
+                alt="<%= blog.title %>"
+                class="w-100 h-100"
+                style="object-fit: cover"
+              />
+            </div>
+
+            <!-- Blog Content -->
+            <div class="card-body d-flex flex-column mt-4">
+              <h5 class="card-title mb-3"><%= blog.title %></h5>
+              <div class="mb-3">
+                <span class="badge bg-primary-subtle text-primary"
+                  ><%= blog.category %></span
+                >
+              </div>
+              <a
+                href="/blogs/<%= blog._id %>"
+                class="btn btn-outline-primary mt-auto align-self-start"
+                >Read More</a
+              >
+            </div>
+
+            <!-- Author Info -->
+            <% if (blog.createdBy) { %>
+            <div
+              class="card-footer bg-transparent d-flex align-items-center gap-3 py-3"
+            >
+              <img
+                src="/user/profile-image/<%= blog.createdBy._id %>"
+                alt="Author"
+                class="author-avatar rounded-circle"
+                style="width: 40px; height: 40px; object-fit: cover"
+              />
+              <div>
+                <h6 class="mb-0"><%= blog.createdBy.fullName %></h6>
+                <small class="text-muted"
+                  >Posted on <%= blog.createdAt.toDateString() %></small
+                >
+              </div>
+            </div>
+            <% } else { %>
+            <div
+              class="card-footer bg-transparent d-flex align-items-center gap-3 py-3"
+            >
+              <img
+                src="/images/defaultProfile.jpg"
+                alt="Author"
+                class="author-avatar rounded-circle"
+                style="width: 40px; height: 40px; object-fit: cover"
+              />
+              <div>
+                <h6 class="mb-0 text-muted">Unknown Author</h6>
+                <small class="text-muted"
+                  >Posted on <%= blog.createdAt.toDateString() %></small
+                >
+              </div>
+            </div>
+            <% } %>
+
+            <!-- Comment Form -->
+            <div class="comment-section p-3">
+              <h6 class="mb-3 fw-semibold">Leave a Comment</h6>
+              <form action="/comment/<%= blog._id %>" method="POST">
+                <div class="input-group">
+                  <input
+                    type="text"
+                    name="content"
+                    class="form-control"
+                    placeholder="Write your comment..."
+                    required
+                  />
+                  <button type="submit" class="btn btn-primary">
+                    <i class="bi bi-send"></i>
+                  </button>
+                </div>
+              </form>
+
+              <!-- Latest Comment -->
+              <% if (blog.latestComment) { %>
+              <div class="latest-comment mt-3">
+                <div class="d-flex align-items-center gap-2 mb-2">
+                  <img
+                    src="<%= blog.latestComment.createdBy?.profileImageUrl %>"
+                    alt="User"
+                    class="rounded-circle"
+                    style="width: 30px; height: 30px; object-fit: cover"
+                  />
+                  <strong class="small"
+                    ><%= blog.latestComment.createdBy?.fullName || 'Anonymous'
+                    %></strong
+                  >
+                </div>
+                <p class="mb-2 small"><%= blog.latestComment.content %></p>
+                <a
+                  href="/blogs/<%= blog._id %>"
+                  class="small text-primary text-decoration-none"
+                >
+                  View all comments <i class="bi bi-arrow-right-short"></i>
+                </a>
+              </div>
+              <% } else { %>
+              <div class="text-center py-2">
+                <p class="text-muted small mb-0">
+                  No comments yet. Be the first to comment!
+                </p>
+              </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </section>
+
+    <%- include('./partials/script') %>
+  </body>
+</html>

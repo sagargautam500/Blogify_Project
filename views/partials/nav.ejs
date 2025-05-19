@@ -1,0 +1,83 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold text-primary" href="/">Blogify</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link fw-semibold" aria-current="page" href="/">Home</a>
+        </li>
+
+        <% if (locals.user) { %>
+        <li class="nav-item">
+          <a class="nav-link fw-semibold" href="/blogs">Blogs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link fw-semibold" href="/addblogs">Add Blog</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle fw-semibold"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              src="/user/profile-image/<%= locals.user._id %>"
+              alt="Profile Image"
+              onerror="this.onerror=null; this.src='/images/defaultProfile.jpg';"
+              class="rounded-circle me-2"
+              style="width: 30px; height: 30px; object-fit: cover"
+            />
+            <span><%= locals.user.fullName || "User" %></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/user/logout">Logout</a></li>
+          </ul>
+        </li>
+        <% } else { %>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle fw-semibold"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Account
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/user/signin">Login</a></li>
+            <li><a class="dropdown-item" href="/user/signup">Signup</a></li>
+          </ul>
+        </li>
+        <% } %>
+      </ul>
+
+      <form class="d-flex" role="search" action="/search" method="GET">
+        <input
+          class="form-control me-2 border border-primary"
+          type="search"
+          name="q"
+          placeholder="Search"
+          aria-label="Search"
+          required
+        />
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>

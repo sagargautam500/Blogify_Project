@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title><%= blog.title %> | Blog Details</title>
+    <style>
+      .blog-header {
+        border-bottom: 3px solid #007bff;
+        padding-bottom: 1.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .blog-image {
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .blog-image:hover {
+        transform: scale(1.02);
+      }
+
+      .blog-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #444;
+      }
+
+      .blog-content p {
+        margin-bottom: 1.5rem;
+      }
+
+      .author-card {
+        background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .comment-card {
+        background: white;
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease;
+        margin-bottom: 1.5rem;
+      }
+
+      .comment-card:hover {
+        transform: translateY(-3px);
+      }
+
+      .comment-avatar {
+        width: 45px;
+        height: 45px;
+        object-fit: cover;
+        border: 2px solid #fff;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .comment-form {
+        background: #f8fafc;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .gradient-btn {
+        background: linear-gradient(135deg, #007bff 0%, #0062cc 100%);
+        border: none;
+        padding: 0.75rem 2rem;
+        transition: transform 0.3s ease;
+      }
+
+      .gradient-btn:hover {
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('./partials/nav') %>
+
+    <!-- Blog Details Section -->
+    <section class="container my-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-9">
+          <!-- Header -->
+          <div class="blog-header text-center">
+            <h1 class="display-4 fw-bold mb-3"><%= blog.title %></h1>
+            <span
+              class="badge bg-primary bg-gradient rounded-pill fs-6 px-4 py-2"
+            >
+              <%= blog.category %>
+            </span>
+          </div>
+
+          <!-- Blog Image -->
+          <% if (blog.blogImageUrl) { %>
+          <div class="mb-5">
+            <img
+              src="<%= blog.blogImageUrl %>"
+              alt="<%= blog.title %>"
+              class="blog-img img-fluid w-100"
+              style="max-height: 600px; object-fit: cover"
+            />
+          </div>
+          <% } %>
+
+          <!-- Blog Content -->
+          <div class="blog-content mb-5"><%= blog.content %></div>
+
+          <!-- Author Info -->
+          <% if (blog.createdBy) { %>
+          <div class="author-card d-flex align-items-center gap-4 mb-5">
+            <img
+              src="/user/profile-image/<%= blog.createdBy._id %>"
+              alt="Author"
+              class="rounded-circle shadow-sm"
+              style="width: 80px; height: 80px; object-fit: cover"
+            />
+            <div>
+              <h3 class="h5 fw-bold mb-1"><%= blog.createdBy.fullName %></h3>
+              <p class="text-muted mb-0">Published on <%= blog.createdAt %></p>
+            </div>
+          </div>
+          <% } %>
+          <!-- Comment Form -->
+          <div class="comment-form mb-5">
+            <h4 class="mb-4 fw-bold">Share Your Thoughts</h4>
+            <form action="/comment/<%= blog._id %>" method="POST">
+              <div class="mb-3">
+                <textarea
+                  class="form-control rounded-3 py-3"
+                  name="content"
+                  rows="4"
+                  placeholder="Write your comment here..."
+                  required
+                  style="border: 2px solid #e9ecef; resize: none"
+                ></textarea>
+              </div>
+              <button type="submit" class="btn gradient-btn text-white">
+                <i class="bi bi-send me-2"></i>Post Comment
+              </button>
+            </form>
+          </div>
+
+          <!-- Comments Section -->
+          <div class="comments-section">
+            <h4 class="mb-4 fw-bold">
+              <%= blog.comments.length %> Comment<%= blog.comments.length !== 1
+              ? 's' : '' %>
+            </h4>
+
+            <% if (blog.comments && blog.comments.length > 0) { %>
+            <div class="comments-list">
+              <% blog.comments.forEach(comment => { %>
+              <div class="comment-card p-4">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                  <img
+                    src="/user/profile-image/<%= comment.createdBy?._id %>"
+                    alt="User"
+                    class="comment-avatar rounded-circle"
+                  />
+                  <div>
+                    <h5 class="mb-0 fw-semibold">
+                      <%= comment.createdBy?.fullName || 'Anonymous' %>
+                    </h5>
+                    <small class="text-muted">
+                      <%= comment.createdAt.toLocaleDateString('en-US', { month:
+                      'short', day: 'numeric', hour: '2-digit', minute:
+                      '2-digit' }) %>
+                    </small>
+                  </div>
+                </div>
+                <p class="mb-0 text-muted"><%= comment.content %></p>
+              </div>
+              <% }) %>
+            </div>
+            <% } else { %>
+            <div class="text-center py-5 bg-light rounded-3">
+              <i class="bi bi-chat-dots fs-1 text-muted mb-3"></i>
+              <p class="text-muted mb-0">
+                No comments yet. Be the first to share your thoughts!
+              </p>
+            </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <%- include('./partials/script') %>
+  </body>
+</html>

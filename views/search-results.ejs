@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head') %>
+    <title>Search Results</title>
+    <style>
+      .search-header {
+        background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+        border-radius: 15px;
+        padding: 2rem;
+        margin: 2rem 0;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .search-card {
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+        margin-bottom: 1.5rem;
+      }
+
+      .search-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+      }
+
+      .search-snippet {
+        color: #444;
+        line-height: 1.7;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .no-results {
+        text-align: center;
+        padding: 4rem 0;
+        background: #f8fafc;
+        border-radius: 15px;
+      }
+
+      .no-results-icon {
+        font-size: 3rem;
+        color: #6c757d;
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <%- include('partials/nav') %>
+
+    <div class="container py-5">
+      <div class="search-header text-center mb-5">
+        <h1 class="display-6 fw-bold mb-3">
+          <i class="bi bi-search me-2"></i>Search Results for
+          <span class="text-primary">"<%= query %>"</span>
+        </h1>
+        <p class="text-muted mb-0"><%= results.length %> matches found</p>
+      </div>
+
+      <% if (results.length > 0) { %>
+      <div class="row g-4">
+        <% results.forEach(blog => { %>
+        <div class="col-md-6">
+          <div class="search-card p-4">
+            <!-- Blog Image -->
+            <div class="card-img-top" style="height: 300px; overflow: hidden">
+              <img
+                src="<%= blog.blogImageUrl %>"
+                alt="<%= blog.title %>"
+                class="w-100 h-100"
+                style="object-fit: cover"
+              />
+            </div>
+
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <% if (blog.category) { %>
+              <span
+                class="badge bg-primary bg-opacity-10 text-primary rounded-pill"
+              >
+                <%= blog.category %>
+              </span>
+              <% } %>
+            </div>
+
+            <h3 class="h5 fw-bold mb-3"><%= blog.title %></h3>
+            <p class="search-snippet mb-4">
+              <%= blog.content.substring(0, 150) %>...
+            </p>
+            <div class="d-flex justify-content-between align-items-center">
+              <% if (blog.createdBy) { %>
+              <div class="d-flex align-items-center gap-2">
+                <img
+                  src="/user/profile-image/<%= blog.createdBy._id%>"
+                  alt="Author"
+                  class="rounded-circle"
+                  style="width: 35px; height: 35px; object-fit: cover"
+                />
+                <small class="text-muted"><%= blog.createdBy.fullName %></small>
+              </div>
+              <% } %>
+              <a
+                href="/blogs/<%= blog._id %>"
+                class="btn btn-primary btn-sm px-3 py-2 d-flex align-items-center"
+              >
+                Read More <i class="bi bi-arrow-right-short ms-2"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+      <% } else { %>
+      <div class="no-results">
+        <i class="bi bi-file-earmark-x no-results-icon"></i>
+        <h3 class="h4 text-muted mb-3">No Matching Results Found</h3>
+        <p class="text-muted mb-4">
+          Try different keywords or check back later
+        </p>
+        <a href="/" class="btn btn-outline-primary">
+          <i class="bi bi-arrow-left me-2"></i>Back to Home
+        </a>
+      </div>
+      <% } %>
+    </div>
+
+    <%- include('./partials/script') %>
+  </body>
+</html>
