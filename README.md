@@ -154,8 +154,8 @@ Confirm Password: Must match password
 
 
 👨‍💻 Author
-Sagar Gautam
-BSc.CSIT @ Bhaktapur Multiple Campus
+Sagar Gautam,
+BSc.CSIT @ Bhaktapur Multiple Campus,
 Mern Stack Developer (React,Node js,Express,Mongodb(via mongoose))
 
 
